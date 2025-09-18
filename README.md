@@ -131,37 +131,6 @@ The smart contract is located in `anchor/programs/votingdapp/src/`. Key instruct
    npm run start
    ```
 
-### Netlify Deployment
-
-#### Issue: RPC URL Error
-When deploying to Netlify, you may encounter:
-```
-TypeError: Endpoint URL must start with `http:` or `https:`.
-```
-
-This occurs when `NEXT_PUBLIC_RPC_URL` is missing or empty.
-
-#### Solution:
-
-1. **Set Environment Variable in Netlify:**
-   - Go to your Netlify dashboard
-   - Select your site
-   - Navigate to **Site settings** > **Build & deploy** > **Environment**
-   - Add:
-     - **Key:** `NEXT_PUBLIC_RPC_URL`
-     - **Value:** `https://api.devnet.solana.com` (or your preferred RPC URL)
-
-2. **Build Settings:**
-   - **Build command:** `npm run build`
-   - **Publish directory:** `.next`
-
-3. **Redeploy** after setting the environment variable.
-
-#### Additional Notes:
-- Ensure RPC URL starts with `http://` or `https://`
-- For production, use mainnet RPC endpoints
-- Set other required environment variables as needed
-
 ### Smart Contract Deployment
 
 To deploy the smart contract to Solana devnet/mainnet:

@@ -1,0 +1,491 @@
+{
+  "address": "5tSMaJXAMfwNgE3sELwR7FNUZyHu8RmYctvVxZJUmNii",
+  "metadata": {
+    "name": "votingdapp",
+    "version": "0.1.0",
+    "spec": "0.1.0",
+    "description": "Created with Anchor"
+  },
+  "instructions": [
+    {
+      "name": "create_poll",
+      "discriminator": [
+        182,
+        171,
+        112,
+        238,
+        6,
+        219,
+        14,
+        110
+      ],
+      "accounts": [
+        {
+          "name": "user",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "poll",
+          "writable": true
+        },
+        {
+          "name": "counter",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  111,
+                  117,
+                  110,
+                  116,
+                  101,
+                  114
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "description",
+          "type": "string"
+        },
+        {
+          "name": "start",
+          "type": "u64"
+        },
+        {
+          "name": "end",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "initialize",
+      "discriminator": [
+        175,
+        175,
+        109,
+        31,
+        13,
+        152,
+        155,
+        237
+      ],
+      "accounts": [
+        {
+          "name": "user",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "counter",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  111,
+                  117,
+                  110,
+                  116,
+                  101,
+                  114
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "registration",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  114,
+                  101,
+                  103,
+                  105,
+                  115,
+                  116,
+                  114,
+                  97,
+                  116,
+                  105,
+                  111,
+                  110
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "register_candidate",
+      "discriminator": [
+        91,
+        136,
+        96,
+        222,
+        242,
+        4,
+        160,
+        182
+      ],
+      "accounts": [
+        {
+          "name": "poll",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "arg",
+                "path": "poll_id"
+              }
+            ]
+          }
+        },
+        {
+          "name": "candidate",
+          "writable": true
+        },
+        {
+          "name": "user",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "registration",
+          "writable": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "poll_id",
+          "type": "u64"
+        },
+        {
+          "name": "name",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "vote",
+      "discriminator": [
+        227,
+        110,
+        155,
+        23,
+        136,
+        126,
+        172,
+        25
+      ],
+      "accounts": [
+        {
+          "name": "poll",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "arg",
+                "path": "poll_id"
+              }
+            ]
+          }
+        },
+        {
+          "name": "candidate",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "arg",
+                "path": "poll_id"
+              },
+              {
+                "kind": "arg",
+                "path": "cid"
+              }
+            ]
+          }
+        },
+        {
+          "name": "voter",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  118,
+                  111,
+                  116,
+                  101,
+                  114
+                ]
+              },
+              {
+                "kind": "arg",
+                "path": "poll_id"
+              },
+              {
+                "kind": "account",
+                "path": "user"
+              }
+            ]
+          }
+        },
+        {
+          "name": "user",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "poll_id",
+          "type": "u64"
+        },
+        {
+          "name": "cid",
+          "type": "u64"
+        }
+      ]
+    }
+  ],
+  "accounts": [
+    {
+      "name": "Candidate",
+      "discriminator": [
+        86,
+        69,
+        250,
+        96,
+        193,
+        10,
+        222,
+        123
+      ]
+    },
+    {
+      "name": "Counter",
+      "discriminator": [
+        255,
+        176,
+        4,
+        245,
+        188,
+        253,
+        124,
+        25
+      ]
+    },
+    {
+      "name": "Poll",
+      "discriminator": [
+        110,
+        234,
+        167,
+        188,
+        231,
+        136,
+        153,
+        111
+      ]
+    },
+    {
+      "name": "Registrations",
+      "discriminator": [
+        40,
+        229,
+        184,
+        221,
+        85,
+        252,
+        121,
+        32
+      ]
+    },
+    {
+      "name": "Voter",
+      "discriminator": [
+        241,
+        93,
+        35,
+        191,
+        254,
+        147,
+        17,
+        202
+      ]
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "PollCounterUnderflow",
+      "msg": "Poll counter cannot be less than zero"
+    },
+    {
+      "code": 6001,
+      "name": "VoterAlreadyVoted",
+      "msg": "Voter cannot vote twice"
+    },
+    {
+      "code": 6002,
+      "name": "CandidateAlreadyRegistered",
+      "msg": "Candidate cannot register twice"
+    },
+    {
+      "code": 6003,
+      "name": "InvalidDates",
+      "msg": "Start date cannot be greater than end date"
+    },
+    {
+      "code": 6004,
+      "name": "CandidateNotRegistered",
+      "msg": "Candidate is not in the poll"
+    },
+    {
+      "code": 6005,
+      "name": "PollNotActive",
+      "msg": "Poll not currently active"
+    },
+    {
+      "code": 6006,
+      "name": "PollDoesNotExist",
+      "msg": "Poll does not exist or not found"
+    }
+  ],
+  "types": [
+    {
+      "name": "Candidate",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "cid",
+            "type": "u64"
+          },
+          {
+            "name": "poll_id",
+            "type": "u64"
+          },
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "votes",
+            "type": "u64"
+          },
+          {
+            "name": "has_registered",
+            "type": "bool"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Counter",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "count",
+            "type": "u64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Poll",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "id",
+            "type": "u64"
+          },
+          {
+            "name": "description",
+            "type": "string"
+          },
+          {
+            "name": "start",
+            "type": "u64"
+          },
+          {
+            "name": "end",
+            "type": "u64"
+          },
+          {
+            "name": "candidates",
+            "type": "u64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Registrations",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "count",
+            "type": "u64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Voter",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "cid",
+            "type": "u64"
+          },
+          {
+            "name": "poll_id",
+            "type": "u64"
+          },
+          {
+            "name": "has_voted",
+            "type": "bool"
+          }
+        ]
+      }
+    }
+  ]
+}

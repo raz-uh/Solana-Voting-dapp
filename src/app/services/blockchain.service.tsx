@@ -14,7 +14,9 @@ import { globalActions } from '../store/globalSlices'
 let tx
 const programId = new PublicKey(idl.address)
 const { setCandidates, setPoll } = globalActions
-const RPC_URL = process.env.NEXT_PUBLIC_RPC_URL || 'https://api.devnet.solana.com'
+const RPC_URL = process.env.NEXT_PUBLIC_RPC_URL && process.env.NEXT_PUBLIC_RPC_URL.trim() !== ''
+  ? process.env.NEXT_PUBLIC_RPC_URL
+  : 'https://api.devnet.solana.com'
 
 export const getProvider = (
   publicKey: PublicKey | null,
